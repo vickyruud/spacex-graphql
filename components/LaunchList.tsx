@@ -1,5 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
+import LaunchItem from "./LaunchItem";
+import { InView } from "react-intersection-observer";
 
 const LIST_LAUNCHES = gql`
   query ListLaunches($limit: Int!, $offset: Int!) {
@@ -14,7 +16,7 @@ const PAGE_SIZE = 10;
 
 const LaunchList = () => {
   const [page, setPage] = useState(0);
-  const { data, loading, error } = useQuery(LIST_LAUNCHES, {
+  const { fetchMore, data, loading, error } = useQuery(LIST_LAUNCHES, {
     variables: {
       limit: PAGE_SIZE,
       offset: page * PAGE_SIZE,
@@ -39,8 +41,9 @@ const LaunchList = () => {
       </button>
       <ul className="p-5">
         {data.launchesPast.map((launch: any) => {
-          return <li key={launch.id}>{launch.mission_name}</li>;
+          return <LaunchItem launch={launch} />;
         })}
+  
       </ul>
       <button onClick={() => setPage((prev) => prev + 1)} className="btn">
         Next
