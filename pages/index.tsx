@@ -11,8 +11,8 @@ const Home: NextPage = () => {
       <p className="text-3xl font-bold underline p-5 text-center">
         Welcome to SpaceX Launches
       </p>
-      {/* <LaunchList /> */}
       <InfiniteScrollList />
+      {/* <LaunchList /> */}
     </div>
   );
 };

@@ -16,7 +16,7 @@ const PAGE_SIZE = 10;
 
 const LaunchList = () => {
   const [page, setPage] = useState(0);
-  const { fetchMore, data, loading, error } = useQuery(LIST_LAUNCHES, {
+  const { data, loading, error } = useQuery(LIST_LAUNCHES, {
     variables: {
       limit: PAGE_SIZE,
       offset: page * PAGE_SIZE,
@@ -41,9 +41,8 @@ const LaunchList = () => {
       </button>
       <ul className="p-5">
         {data.launchesPast.map((launch: any) => {
-          return <LaunchItem launch={launch} />;
+          return <LaunchItem key={launch.id} launch={launch} />;
         })}
-  
       </ul>
       <button onClick={() => setPage((prev) => prev + 1)} className="btn">
         Next

@@ -36,7 +36,7 @@ const InfiniteScrollList = () => {
     <div className="h-64 overflow-auto">
       <ul className="p-5">
         {data.launches.map((launch: any) => {
-          return <LaunchItem launch={launch} />;
+          return <LaunchItem key={launch.id} launch={launch} />;
         })}
         {data && (
           <InView
